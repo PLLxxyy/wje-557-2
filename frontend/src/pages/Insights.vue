@@ -11,7 +11,7 @@ import { useAssessment } from '../hooks/useAssessment'
 import { useMeditation } from '../hooks/useMeditation'
 import { useMood } from '../hooks/useMood'
 
-const { entries, monthlyAverage, loadMood, currentStreak, longestStreak, monthlyRecordRate } = useMood()
+const { entries, monthlyAverage, loadMood, longestStreak, monthlyRecordRate } = useMood()
 const { totalMinutes, loadMeditations } = useMeditation()
 const { latest, loadAssessments } = useAssessment()
 

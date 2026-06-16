@@ -61,15 +61,9 @@ export const useMoodStore = defineStore('mood', () => {
     const dates = dateSet.value
     if (!dates.size) return 0
     const today = toDateKey()
+    if (!dates.has(today)) return 0
     let streak = 0
-    const d = new Date()
-    if (!dates.has(today)) {
-      d.setDate(d.getDate() - 1)
-      const yesterday = toDateKey(d)
-      if (!dates.has(yesterday)) return 0
-    }
     const cursor = new Date()
-    if (!dates.has(today)) cursor.setDate(cursor.getDate() - 1)
     while (dates.has(toDateKey(cursor))) {
       streak++
       cursor.setDate(cursor.getDate() - 1)
