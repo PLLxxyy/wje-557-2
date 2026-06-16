@@ -275,7 +275,7 @@ a {
 
 .metric-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 14px;
   margin-bottom: 18px;
 }
@@ -594,6 +594,26 @@ a {
   border-radius: 12px;
   background: var(--surface);
   box-shadow: var(--shadow);
+}
+
+.streak-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent-strong);
+  font-size: 14px;
+}
+
+.streak-badge strong {
+  font-size: 20px;
+}
+
+.streak-flame {
+  font-size: 18px;
 }
 
 @keyframes breathe {

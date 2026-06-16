@@ -9,7 +9,7 @@ import { useGoal } from '../hooks/useGoal'
 import { useMood } from '../hooks/useMood'
 import { toDateKey } from '../utils/date'
 
-const { entries, loadMood, saveMood, todayMood } = useMood()
+const { entries, loadMood, saveMood, todayMood, currentStreak } = useMood()
 const { activeGoals, loadGoals } = useGoal()
 
 const selectedDate = ref(toDateKey())
@@ -65,6 +65,11 @@ function toggleEmotion(tag: EmotionTag) {
       <p class="eyebrow">{{ todayLabel }}</p>
       <h1>今天的心情，先在这里轻轻放下。</h1>
       <p>{{ greeting }}</p>
+      <div class="streak-badge">
+        <span class="streak-flame">🔥</span>
+        <strong>{{ currentStreak }}</strong>
+        <span>天连续记录</span>
+      </div>
     </div>
     <WeeklyCalendar :entries="entries" :selected-date="selectedDate" @select="(date) => { selectedDate = date; hydrateForm() }" />
   </section>

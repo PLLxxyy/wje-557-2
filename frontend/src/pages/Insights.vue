@@ -6,11 +6,12 @@ import { emotionDistributionOption } from '../charts/emotionDistribution'
 import { moodTrendOption } from '../charts/moodTrend'
 import { sleepMoodCorrelationOption } from '../charts/correlation'
 import { assessmentRadarOption } from '../charts/assessmentRadar'
+import { moodHeatmapOption } from '../charts/moodHeatmap'
 import { useAssessment } from '../hooks/useAssessment'
 import { useMeditation } from '../hooks/useMeditation'
 import { useMood } from '../hooks/useMood'
 
-const { entries, monthlyAverage, loadMood } = useMood()
+const { entries, monthlyAverage, loadMood, currentStreak, longestStreak, monthlyRecordRate } = useMood()
 const { totalMinutes, loadMeditations } = useMeditation()
 const { latest, loadAssessments } = useAssessment()
 
@@ -32,11 +33,14 @@ const sleepAverage = computed(() => {
   <section class="metric-grid">
     <div class="surface metric-card"><strong>{{ monthlyAverage }}</strong><span>平均心情</span></div>
     <div class="surface metric-card"><strong>{{ sleepAverage }}h</strong><span>平均睡眠</span></div>
+    <div class="surface metric-card"><strong>{{ monthlyRecordRate }}%</strong><span>本月记录率</span></div>
+    <div class="surface metric-card"><strong>{{ longestStreak }}天</strong><span>最长连续</span></div>
     <div class="surface metric-card"><strong>{{ totalMinutes }}</strong><span>冥想分钟</span></div>
     <div class="surface metric-card"><strong>{{ latest?.severity ?? '暂无' }}</strong><span>最新测评</span></div>
   </section>
 
   <section class="chart-grid">
+    <EChartPanel title="年度心情热力图" :option="moodHeatmapOption(entries)" />
     <EChartPanel title="情绪与睡眠相关性" :option="sleepMoodCorrelationOption(entries)" />
     <EChartPanel title="心情趋势" :option="moodTrendOption(entries)" />
     <EChartPanel title="触发情绪分布" :option="emotionDistributionOption(entries)" />
